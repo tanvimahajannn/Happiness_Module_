@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import HRMSIntegration from './components/HRMSIntegration';
 import WelcomeScreen from './components/WelcomeScreen';
 import PillarScreen from './components/PillarScreen';
 import ExerciseScreen from './components/ExerciseScreen';
@@ -8,7 +7,7 @@ import SettingsScreen from './components/SettingsScreen';
 import Confetti from './components/Confetti';
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState('hrms');
+  const [currentScreen, setCurrentScreen] = useState('welcome');
   const [selectedPillar, setSelectedPillar] = useState(null);
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -28,25 +27,9 @@ function App() {
     }, 3000);
   };
 
-  useEffect(() => {
-    // Simulate HRMS login after 2 seconds
-    const timer = setTimeout(() => {
-      if (currentScreen === 'hrms') {
-        setCurrentScreen('welcome');
-      }
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [currentScreen]);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 font-nunito overflow-hidden">
       <AnimatePresence mode="wait">
-        {currentScreen === 'hrms' && (
-          <HRMSIntegration
-            key="hrms"
-            onNavigate={() => navigateTo('welcome')}
-          />
-        )}
         {currentScreen === 'welcome' && (
           <WelcomeScreen
             key="welcome"
